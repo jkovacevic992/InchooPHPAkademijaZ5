@@ -26,6 +26,7 @@ final class App
             $action = 'index';
         } else {
             $action = strtolower($pathParts[1]);
+
         }
 
         if (class_exists($controller) && method_exists($controller, $action)) {
@@ -34,7 +35,7 @@ final class App
 
             $controllerInstance->$action();
         } else {
-            header("HTTP/1.0 404 Not Found");
+            header('HTTP/1.0 404 Not Found', true, 404);
         }
 
     }

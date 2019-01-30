@@ -12,7 +12,7 @@ $includePaths = implode(PATH_SEPARATOR, array(
 
 
 set_include_path($includePaths);
-function class_path($class)
+spl_autoload_register(function ($class)
 {
 
     $classPath = strtr($class, '\\', DIRECTORY_SEPARATOR) . '.php';
@@ -22,7 +22,7 @@ function class_path($class)
         include $classPath;
     }
 
-}
-spl_autoload_register('class_path');
+});
+
 
 App::start();
