@@ -12,12 +12,13 @@ $includePaths = implode(PATH_SEPARATOR, array(
 
 
 set_include_path($includePaths);
-spl_autoload_register(function ($class)
+
+spl_autoload_register(function($class)
 {
 
     $classPath = strtr($class, '\\', DIRECTORY_SEPARATOR) . '.php';
-
-    if(file_exists("app/model/".$classPath) || file_exists("app/controller/".$classPath)){
+    $file = stream_resolve_include_path($classPath);
+    if($file){
 
         include $classPath;
     }
